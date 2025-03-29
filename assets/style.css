@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+}
+
+.rooms {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.room {
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 250px;
+}
+
+.book-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.book-btn:hover {
+    background: #0056b3;
+}
+
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+}
+
+input, select, button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Availability Section */
+.availability-section {
+    text-align: center;
+    background: white;
+    margin: 40px auto;
+    padding: 20px;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.availability-section h2 {
+    color: #333;
+}
+
+#availability-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#availability-form label {
+    font-weight: bold;
+}
+
+#availability-form input, #availability-form select, #availability-form button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#availability-form button {
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#availability-form button:hover {
+    background: #0056b3;
+}
+
+#availability-message {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+ /*Success & error span color */

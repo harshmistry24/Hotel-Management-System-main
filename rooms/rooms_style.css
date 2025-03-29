@@ -1,0 +1,136 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #eef2f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Center the form vertically */
+}
+
+/* Booking Form Container */
+.booking-container {
+    background: white;
+    width: 420px; /* Increased width */
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Inner Form Box */
+.form-box {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.1);
+    width: 70%; /* Increased width of the form */
+    margin: 0 auto; /* Center the form inside the box */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+label {
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 12px;
+}
+
+input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 92%;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+}
+
+input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0px 0px 4px rgba(0, 123, 255, 0.5);
+}
+
+/* Submit Button */
+button {
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 16px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #0056b3;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Availability Message */
+#availability-message {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+/* Price Section */
+#total-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a237e;
+    margin-top: 8px;
+}
+
+.go-back-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+}
+
+.go-back-btn:hover {
+    background-color: #333;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .booking-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .form-box {
+        width: 90%;
+        padding: 15px;
+    }
+
+    input {
+        font-size: 13px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}

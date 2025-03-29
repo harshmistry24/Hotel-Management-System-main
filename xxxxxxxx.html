@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation bar</title>
+    <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        a {
+            color: aliceblue;
+            text-decoration: none;
+        }
+
+        /* IMAGE SLIDER STYLES */
+        .slider-container {
+            width: 100%;
+            max-width: 100%;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            /* background-color: black; */
+            /* Optional: Adds a background to fill empty spaces */
+        }
+
+        .slider {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            transition: transform 1s ease-in-out;
+        }
+
+        .slide {
+            width: 100%;
+            flex: 0 0 auto;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            display:block;
+            margin: auto;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* align-items: cente; */
+            /* Ensures full image is visible without cropping */
+        }
+
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="logo.jpg" alt="The President LOGO">
+                <span>The<strong> President</strong></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.php">Rooms</a></li>
+                <li><a href="#">Banquet Hall</a></li>
+                <li><a href="#">Dining</a></li>
+                <li><a href="#">Food</a></li>
+                <li><a href="#">My Reservations</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="signin-btn"><i class="fas fa-user"></i>
+                    <a href="http://localhost/HMS Project/login.html">SIGN IN</a>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- IMAGE SLIDER -->
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img src="HMSimages/6.png" alt="Luxury Hotel"></div>
+            <div class="slide"><img src="HMSimages/duplex.jpg" alt="Comfortable Rooms"></div>
+            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <div class="rooms">
+        <div class="room">
+            <img src="HMSimages/duplex.jpg" alt="deluxe room" width="250" height="250" />
+            <h2>Deluxe Room</h2>
+            <p>Luxury and comfort.</p>
+        </div>
+        <div class="room">
+            <img src="HMSimages/suite.png" alt="suite room" width="250" height="250" />
+            <h2>Suite</h2>
+            <p>Spacious and elegant.</p>
+        </div>
+        <div class="room">
+            <img src="HMSimages/6.png" alt="Standard room" width="250" height="250" />
+            <h2>Standard Room</h2>
+            <p>Affordable and cozy.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>Experience luxury and comfort at The President Hotel. Your satisfaction is our priority.</p>
+            </div>
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone"></i> +91 9999999999</p>
+                <p><i class="fas fa-envelope"></i> info@presidenthotel.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> The President Hotel, AV Road, Anand, Gujarat, India</p>
+            </div>
+            <div class="footer-section social">
+                <h3>Follow Us</h3>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 The President Hotel. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            const slider = document.querySelector('.slider');
+            const totalSlides = document.querySelectorAll('.slide').length;
+            if (index >= totalSlides) {
+                currentIndex = 0;
+            } else if (index < 0) {
+                currentIndex = totalSlides - 1;
+            } else {
+                currentIndex = index;
+            }
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentIndex - 1);
+        }
+
+        setInterval(nextSlide, 5000); // Auto slide every 3 seconds
+    </script>
+
+</body>
+
+</html>
