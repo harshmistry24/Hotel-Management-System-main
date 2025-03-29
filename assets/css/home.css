@@ -1,0 +1,149 @@
+/* IMAGE SLIDER STYLES */
+.slider-container {
+    width: 90%;
+    /* Reduce width slightly to create space */
+    max-width: 1200px;
+    /* Prevents slider from becoming too wide on large screens */
+    height: 500px;
+    /* Adjust as needed */
+    overflow: hidden;
+    position: relative;
+    margin: 30px auto;
+    /* Adds space around and centers the slider */
+    border-radius: 15px;
+    /* Optional: Adds rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* Optional: Adds a shadow for better visibility */
+}
+
+.slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures image fully covers the slide */
+    border-radius: 15px;
+    /* Matches container for a smooth look */
+}
+
+
+
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.welcome-text {
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+    color: rgb(0, 0, 0);
+    /* background-color: black; */
+    /* Matches the background in your image */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+.welcome-text p {
+    font-size: 18px;
+    color: #666;
+}
+
+/* SERVICES SECTION STYLING */
+.services {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #f8f8f8;
+}
+
+.services h2 {
+    font-size: 42px;
+    font-family: 'Playfair Display', serif;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.services-subtitle {
+    font-size: 22px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.services-description {
+    font-size: 18px;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.services-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.service-box {
+    background: white;
+    padding: 25px;
+    width: 280px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.service-box:hover {
+    transform: translateY(-5px);
+}
+
+.service-box i {
+    font-size: 40px;
+    color: #c89d66;
+    margin-bottom: 10px;
+}
+
+.service-box h3 {
+    font-size: 22px;
+    color: #222;
+    margin-bottom: 8px;
+}
+
+.service-box p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}

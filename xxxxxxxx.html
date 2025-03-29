@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation bar</title>
     <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     <style>
         a {
@@ -15,64 +17,8 @@
             text-decoration: none;
         }
 
-        /* IMAGE SLIDER STYLES */
-        .slider-container {
-            width: 100%;
-            max-width: 100%;
-            height: 400px;
-            overflow: hidden;
-            position: relative;
-            justify-content: center;
-            align-items: center;
-            /* background-color: black; */
-            /* Optional: Adds a background to fill empty spaces */
-        }
-
-        .slider {
-            display: flex;
-            width: 300%;
-            height: 100%;
-            transition: transform 1s ease-in-out;
-        }
-
-        .slide {
-            width: 100%;
-            flex: 0 0 auto;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            display:block;
-            margin: auto;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            /* align-items: cente; */
-            /* Ensures full image is visible without cropping */
-        }
-
-
-        .prev,
-        .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 20px;
-        }
-
-        .prev {
-            left: 10px;
-        }
-
-        .next {
-            right: 10px;
+        a:hover {
+            color: #f0c040;
         }
     </style>
 </head>
@@ -82,8 +28,8 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="logo.jpg" alt="The President LOGO">
-                <span>The<strong> President</strong></span>
+                <img src="HMSimages/1logo.png" alt="The President LOGO">
+                <!-- <span>The<strong> President</strong></span> -->
             </div>
             <ul class="nav-links">
                 <li><a href="index.php">Rooms</a></li>
@@ -100,6 +46,11 @@
         </nav>
     </header>
 
+    <div class="welcome-text">
+        <h1>Welcome to <strong>The President</strong></h1>
+        <p>Experience luxury, comfort, and elegance at our hotel.</p>
+    </div>
+
     <!-- IMAGE SLIDER -->
     <div class="slider-container">
         <div class="slider">
@@ -112,6 +63,9 @@
         <button class="prev" onclick="prevSlide()">&#10094;</button>
         <button class="next" onclick="nextSlide()">&#10095;</button>
     </div>
+
+    <!--js for slider -->
+    <script src="assets/js/image_slide.js"></script>
 
     <div class="rooms">
         <div class="room">
@@ -130,6 +84,41 @@
             <p>Affordable and cozy.</p>
         </div>
     </div>
+
+    <section class="services">
+        <h2>Our Services</h2>
+        <p class="services-subtitle">Exceptional Experiences</p>
+        <p class="services-description">
+            Indulge in a world of amenities and services designed to elevate your stay from ordinary to extraordinary.
+        </p>
+        <div class="services-container">
+            <div class="service-box">
+                <i class="fas fa-bed"></i>
+                <h3>Luxury Accommodation</h3>
+                <p>Experience unparalleled comfort in our meticulously designed rooms and suites, featuring premium
+                    amenities and elegant furnishings.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-utensils"></i>
+                <h3>Gourmet Dining</h3>
+                <p>Indulge your palate at our award-winning restaurants, offering exquisite culinary creations using the
+                    finest local and international ingredients.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-spa"></i>
+                <h3>Spa & Wellness</h3>
+                <p>Rejuvenate your body and mind at our premium spa, featuring a comprehensive range of treatments,
+                    thermal experiences, and fitness facilities.</p>
+            </div>
+            <div class="service-box">
+                <i class="fas fa-bell-concierge"></i>
+                <h3>Concierge Service</h3>
+                <p>Our dedicated concierge team is available 24/7 to assist with any request, from restaurant
+                    reservations to exclusive local experiences.</p>
+            </div>
+        </div>
+    </section>
+
 
     <footer class="footer">
         <div class="footer-container">
@@ -155,34 +144,6 @@
             <p>&copy; 2025 The President Hotel. All rights reserved.</p>
         </div>
     </footer>
-
-    <script>
-        let currentIndex = 0;
-
-        function showSlide(index) {
-            const slider = document.querySelector('.slider');
-            const totalSlides = document.querySelectorAll('.slide').length;
-            if (index >= totalSlides) {
-                currentIndex = 0;
-            } else if (index < 0) {
-                currentIndex = totalSlides - 1;
-            } else {
-                currentIndex = index;
-            }
-            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-
-        function nextSlide() {
-            showSlide(currentIndex + 1);
-        }
-
-        function prevSlide() {
-            showSlide(currentIndex - 1);
-        }
-
-        setInterval(nextSlide, 5000); // Auto slide every 3 seconds
-    </script>
-
 </body>
 
 </html>

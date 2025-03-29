@@ -1,5 +1,3 @@
-<?php include 'home.php'; ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Booking</title>
     <link rel="stylesheet" href="assets/style.css">
-    <!-- <script src="assets/script.js" defer> -->
+    <link rel="stylesheet" href="nav.css">
+
     <script>
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("availability-form").addEventListener("submit", function (event) {
@@ -65,7 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </head>
 <body>
-   
+    <!-- Header -->
+   <?php include 'header.php' ?>
 
     <div class="availability-section">
         <h2>Check Room Availability</h2>
@@ -112,7 +112,8 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
     </div>
 
-    <?php include 'footer.html'; ?>
+    <!-- Footer -->
+    <?php include 'footer.php'; ?>
 
 </body>
 </html>
