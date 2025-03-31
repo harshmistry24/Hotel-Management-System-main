@@ -201,7 +201,7 @@ $result = $conn->query($query);
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class="menu-item" onclick="openModal(this)">
                 <img src="admin/food/<?= $row['image_name'] ?>" alt="Menu Image"/>
-                <div class="overlay"><p><?= $row['menu_discription'] ?></p></div>
+                <div class="overlay"><p><?= $row['menu_description'] ?></p></div>
             </div>
         <?php endwhile; ?>
     </div>

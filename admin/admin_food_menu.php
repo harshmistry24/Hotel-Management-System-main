@@ -27,20 +27,25 @@ $result = $conn->query($query);
             <form action="upload_food_menu.php" method="POST" enctype="multipart/form-data">
                 <label for="menu_image">Upload Food Menu Image:</label>
                 <input type="file" name="menu_image" required>
+                <label for="menu_disc">Menu Description:</label>
+                <input type="text" name="menu_description">
                 <button type="submit" name="upload">Upload</button>
             </form>
 
+            <br><br>
             <h3>Existing Menu Images</h3>
             <table border="1">
                 <tr>
                     <th>ID</th>
                     <th>Image</th>
+                    <th>Description</th>
                     <th>Action</th>
                 </tr>
                 <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
                     <td><?= $row['id'] ?></td>
                     <td><img src="food/<?= $row['image_name'] ?>" width="100"></td>
+                    <td><?= $row['menu_description'] ?></td>
                     <td>
                         <a href="delete_food_menu.php?id=<?= $row['id'] ?>" onclick="return confirm('Are you sure you want to DELETE this menu?')">Delete</a>
                     </td>
