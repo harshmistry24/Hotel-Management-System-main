@@ -6,14 +6,14 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.php">Rooms</a></li>
-                <li><a href="#">Banquet Hall</a></li>
-                <li><a href="#">Dining</a></li>
-                <li><a href="#">Food</a></li>
+                <li><a href="banquet.php">Banquet Hall</a></li>
+                <li><a href="dining.php">Dining</a></li>
+                <li><a href="food_menu.php">Food</a></li>
                 <li><a href="#">My Reservations</a></li>
             </ul>
             <div class="nav-buttons">
                 <button class="signin-btn"><i class="fas fa-user"></i>
-                    <a href="http://localhost/workspace/Hotel/room_booking/logout.php">Logout</a>
+                    <a href="http://localhost/workspace/Hotel/room_booking/logout.php" style="color: aliceblue; text-decoration: none;">Logout</a>
                 </button>
             </div>
         </nav>

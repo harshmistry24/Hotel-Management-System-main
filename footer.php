@@ -9,8 +9,7 @@ $footer = $result->fetch_assoc();
     <div class="footer-container">
         <div class="footer-section about">
             <h3>About Us</h3>
-            <p>Experience luxury and comfort at The President Hotel. Your satisfaction is our priority.</p>
-            <p><?= $footer['phone'] ?></p>
+            <p><?= $footer['about_us'] ?></p>
         </div>
         <div class="footer-section contact">
             <h3>Contact Us</h3>
