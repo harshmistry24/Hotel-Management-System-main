@@ -1,5 +1,15 @@
 <?php
+session_start();
 include 'db_connect.php';
+//upload the email of logged in user to database
+if (!isset($_SESSION['user_email'])) {
+    echo "<script>alert('You must be logged in to book a table.');
+    window.location.href='login.html';</script>"; 
+}
+
+$user_email = $_SESSION['user_email'];
+// //debugging
+// echo "logged in as :".$user_email;
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,14 +23,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Combine country code and contact number
     $full_contact = $country_code . $contact;
+    
+     // Validate date (should not be in the past)
+     $current_date = date("Y-m-d");
+     if ($date < $current_date) {
+         echo "<script>alert('Invalid date! Please select a valid date.');
+         window.history.back();</script>";
+         exit();
+     }
 
     // Prepare SQL query
-    $stmt = $conn->prepare("INSERT INTO dining (first_name, last_name, contact, guests, date, time) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $first_name, $last_name, $full_contact, $guests, $date, $time);
+    $stmt = $conn->prepare("INSERT INTO dining (first_name, last_name, email, contact, guests, date, time) VALUES (?, ?, ?, ?, ?, ?,?)");
+    $stmt->bind_param("sssssss", $first_name, $last_name, $user_email, $full_contact, $guests, $date, $time);
 
+    //booking confirmation
     if ($stmt->execute()) {
-        echo "<script>alert('Booking confirmed!'); 
-        window.location.href='dining.php';</script>";
+        $type = $_POST['type'] ?? 'dining'; // Default to 'dining' if not set
+
+        // If the type is dining, redirect or perform specific actions
+        if ($type === 'dining') {
+            header("Location: php/process_payment.php?type=dining");
+            exit;
+        }
+
+        // echo "<script>alert('Booking confirmed!')</script>"; 
+        // echo "<script>window.location.href='php/process_payment.php';</script>";
     } else {
         echo "<script>alert('Error: " . $stmt->error . "');</script>";
     }
@@ -39,25 +66,109 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Booking</title>
+    <title>Restaurant Dining Booking</title>
     <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="assets/image_slider.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- <link rel="stylesheet" href="assets/css/dining_style.css"> -->
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            /* display: flex; */
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        /* IMAGE SLIDER STYLES */
+.slider-container {
+    width: 90%;
+    /* Reduce width slightly to create space */
+    max-width: 1200px;
+    /* Prevents slider from becoming too wide on large screens */
+    height: 500px;
+    /* Adjust as needed */
+    overflow: hidden;
+    position: relative;
+    margin: 30px auto;
+    /* Adds space around and centers the slider */
+    border-radius: 15px;
+    /* Optional: Adds rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* Optional: Adds a shadow for better visibility */
+}
+
+.slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensures image fully covers the slide */
+    border-radius: 15px;
+    /* Matches container for a smooth look */
+}
+
+
+
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f4f4f4;
+         }
+        .welcome-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 50px;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .welcome-text-2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 30px;
+            text-align: center;
         }
         .table-booking-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            width: 400px;
-            text-align: left;
+            max-width: 500px;
+            margin: 50px auto; 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+            text-align: center; 
         }
         h2 {
             color: #d35400;
@@ -109,9 +220,30 @@ $conn->close();
     </style>
 </head>
 <body>
+
+<p class="welcome-text">"Where Every Bite Becomes a Memory."</p>
+<p class="welcome-text-2">Treat yourself to a culinary journey with dishes crafted to perfection. Reserve your table today at The President.</p>
+
+
+     <!-- IMAGE SLIDER -->
+     <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img src="HMSimages/6.png" alt="Luxury Hotel"></div>
+            <div class="slide"><img src="HMSimages/duplex.jpg" alt="Comfortable Rooms"></div>
+            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <!--js for slider -->
+    <script src="assets/js/image_slide.js"></script>
+
     <div class="table-booking-container">
         <h2>Reserve Your Table</h2>
-        <form method="post" action="./dining.php">
+        <form method="post" action="">
             <div class="booking-grid">
                 <div class="input-group">
                     <input type="text" name="first_name" placeholder="First Name" required>
@@ -133,10 +265,11 @@ $conn->close();
                     <input type="date" name="date" required>
                     <input type="time" name="time" min="09:00" max="23:00" required>
                 </div>
-                <button type="submit" class="book-now">Book Now</button>
+                <input type="hidden" name="type" value="dining">
+                <button type="submit" class="book-now" >Book Now</button>
             </div>
         </form>
-        <p id="confirmation" style="color: green; margin-top: 10px; text-align: center;"></p>
+        <p id="confirmation" style="color: red; margin-top: 10px; text-align: center;"></p>
     </div>
 
     <script>
@@ -148,10 +281,15 @@ $conn->close();
             let date = document.querySelector("input[name='date']").value;
             let time = document.querySelector("input[name='time']").value;
 
+            let today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+
             if (!firstName || !lastName || !contact || !guests || !date || !time) {
                 event.preventDefault();
                 document.getElementById("confirmation").innerText = "⚠️ Please fill all details correctly.";
-            }
+            }else if (date < today) {
+                event.preventDefault();
+                document.getElementById("confirmation").innerText = "⚠️ Invalid date! Please select a valid date.";
+    }
         });
     </script>
 

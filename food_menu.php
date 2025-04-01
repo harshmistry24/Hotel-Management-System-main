@@ -28,7 +28,6 @@ $result = $conn->query($query);
 
       body {
         background-color: #f5f5f5;
-        padding: 2rem;
         line-height: 1.6;
       }
 
@@ -39,7 +38,7 @@ $result = $conn->query($query);
 
       .header {
         text-align: center;
-        margin-bottom: 3rem;
+        margin: 24px 16px 12px 16px;
         padding: 2rem 0;
         background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
         border-radius: 15px;
@@ -48,7 +47,8 @@ $result = $conn->query($query);
       }
 
       h1 {
-        font-size: 2.8rem;
+        font-family:playfair;
+        font-size: 3.8rem;
         margin-bottom: 1rem;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
       }
@@ -192,7 +192,7 @@ $result = $conn->query($query);
   <body>
     <div class="container">
       <div class="header">
-        <h1>Our Menu</h1>
+        <h1>A Menu as Unique as Your Taste</h1>
         <p class="subtitle">Click on any menu page to view in detail</p>
       </div>
 

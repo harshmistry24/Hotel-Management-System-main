@@ -96,16 +96,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <div class="rooms">
         <div class="room">
+            <img src="HMSimages/duplex.jpg" alt="deluxe room" width="250" height="250" />
             <h2>Deluxe Room</h2>
             <p>Luxury and comfort.</p>
             <a href="rooms/deluxe.php" class="book-btn">Book Now</a>
         </div>
         <div class="room">
+             <img src="HMSimages/suite.png" alt="suite room" width="250" height="250" />
             <h2>Suite</h2>
             <p>Spacious and elegant.</p>
             <a href="rooms/suite.php" class="book-btn">Book Now</a>
         </div>
         <div class="room">
+            <img src="HMSimages/6.png" alt="Standard room" width="250" height="250" />
             <h2>Standard Room</h2>
             <p>Affordable and cozy.</p>
             <a href="rooms/standard.php" class="book-btn">Book Now</a>

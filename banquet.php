@@ -1,8 +1,19 @@
 <?php
+session_start();
+
+$user_email = $_SESSION['user_email'];
+
 include 'db_connect.php';
 
+if (!isset($_SESSION['user_email'])) {
+    echo "<script>alert('You must be logged in to book a table.');
+    window.location.href='login.html';</script>"; 
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!empty($_POST['date']) && !empty($_POST['persons']) && !empty($_POST['eventType']) && !empty($_POST['days']) && !empty($_POST['totalRent'])) {
+    if (!empty($_POST['name']) && !empty($_POST['date']) && !empty($_POST['persons']) && !empty($_POST['eventType']) && !empty($_POST['days']) && !empty($_POST['totalRent'])) {
+        $name = $_POST['name'];
         $date = $_POST['date'];
         $persons = $_POST['persons'];
         $eventType = $_POST['eventType'];
@@ -23,12 +34,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Insert new booking if no booking exists for that date
-        $stmt = $conn->prepare("INSERT INTO banquet (date, persons, event_type, days, total_rent) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sisis", $date, $persons, $eventType, $days, $totalRent);
+        $stmt = $conn->prepare("INSERT INTO banquet (name, email, date, persons, event_type, days, total_price) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssi",$name, $user_email, $date, $persons, $eventType, $days, $totalRent);
 
         if ($stmt->execute()) {
-            echo "<script>alert('Booking confirmed!'); 
-            window.location.href='payment.html';</script>";
+            $booking_id = $conn->insert_id;
+
+            $type = $_POST['type'] ?? 'banquet'; // Default to 'banquet' if not set
+            // If the type is banquet, redirect or perform specific actions
+            if ($type === 'banquet') {
+                header("Location: php/process_payment.php?type=banquet&booking_id=$booking_id");
+                exit();
+        }
+
+        // echo "<script>alert('Booking confirmed!');</script>";
         } else {
             echo "Error inserting data: " . $stmt->error;
         }
@@ -53,7 +72,72 @@ $conn->close();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="nav.css">
+    <!-- <link rel="stylesheet" href="assets/image_slider.css"> -->
     <style>
+
+        /* IMAGE SLIDER STYLES */
+        .slider-container {
+            width: 90%;
+        /* Reduce width slightly to create space */
+        max-width: 1200px;
+        /* Prevents slider from becoming too wide on large screens */
+        height: 500px;
+        /* Adjust as needed */
+        overflow: hidden;
+        position: relative;
+        margin: 30px auto;
+        /* Adds space around and centers the slider */
+        border-radius: 15px;
+        /* Optional: Adds rounded corners */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        /* Optional: Adds a shadow for better visibility */
+        }
+
+        .slider {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.8s ease-in-out;
+        }
+
+        .slide {
+        min-width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Ensures image fully covers the slide */
+        border-radius: 15px;
+        /* Matches container for a smooth look */
+        }
+
+      .prev,
+      .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 20px;
+        }
+
+      .prev {
+        left: 10px;
+        }
+
+      .next {
+        right: 10px;
+      }
+
         body { 
             font-family: Arial, sans-serif; 
             margin: 0; 
@@ -61,11 +145,13 @@ $conn->close();
             background-color: #f4f4f4;
          }
 
-         .welcome-text {
+        .welcome-text {
             font-family: 'Playfair Display', serif;
             font-size: 50px;
             font-weight: bold;
             color: #444;
+            margin-right: 30px;
+            margin-left: 30px;
             margin-bottom: 30px;
             text-align: center;
         }
@@ -108,7 +194,7 @@ $conn->close();
             color: green; 
         }
 
-        button { 
+        .book-btn { 
             width: 100%; 
             padding: 10px; 
             background: #28a745; 
@@ -120,7 +206,7 @@ $conn->close();
             transition: background 0.3s;
         }
 
-        button:hover { 
+        .book-btn:hover { 
             background: #218838; 
         }
     </style>
@@ -128,6 +214,23 @@ $conn->close();
 </head>
 <body>
     <p class="welcome-text">Welcome to our luxurious banquet hall. Perfect for weddings, parties & corporate events.</p>
+
+     <!-- IMAGE SLIDER -->
+     <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img src="HMSimages/6.png" alt="Luxury Hotel"></div>
+            <div class="slide"><img src="HMSimages/duplex.jpg" alt="Comfortable Rooms"></div>
+            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <!--js for slider -->
+    <script src="assets/js/image_slide.js"></script>
+
 
     <div class="container">
         <h1>Banquet Hall Booking</h1>
@@ -137,6 +240,10 @@ $conn->close();
 
         <h2>Book Now</h2>
         <form action="" method="POST" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
             <div class="form-group">
                 <label for="date">Booking Date:</label>
                 <input type="date" id="date" name="date" required>
@@ -155,7 +262,8 @@ $conn->close();
             </div>
             <p class="rent">Total Rent: ₹<span id="totalRentDisplay">5000</span></p>
             <input type="hidden" id="totalRent" name="totalRent" value="5000">
-            <button type="submit">Book Now</button>
+            <input type="hidden" name="type" value="banquet">
+            <button type="submit" class="book-btn">Book Now</button>
         </form>
     </div>
 
@@ -178,6 +286,7 @@ $conn->close();
         
         function validateForm() {
             let date = document.getElementById("date").value;
+            let name = document.getElementById("name").value;
             let persons = document.getElementById("persons").value;
             let eventType = document.getElementById("eventType").value;
             let days = document.getElementById("days").value;
@@ -185,6 +294,10 @@ $conn->close();
 
             if (!date) {
                 alert("Please select a booking date.");
+                return false;
+            }
+            if (!name) {
+                alert("Please enter a name.");
                 return false;
             }
             if (!persons || persons < 1) {

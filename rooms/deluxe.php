@@ -30,8 +30,6 @@
     </form>
 </body>
 </html> -->
-<!-- <?php include 'D:\Wampp\www\workspace\Hotel\room_booking\header.php'; ?> -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,8 +56,8 @@
                 <label>Name:</label>
                 <input type="text" name="name" required>
 
-                <label>Email:</label>
-                <input type="email" name="email" required>
+                <!-- <label>Email:</label>
+                <input type="email" name="email" required> -->
 
                 <label>Phone:</label>
                 <input type="text" name="phone" required>
@@ -70,6 +68,7 @@
                 <label>Check-out Date:</label>
                 <input type="date" name="checkout" id="checkout" required>
 
+                <input type="hidden" name="type" value="room">
                 <button type="submit" id="submit-btn" >Proceed to Payment</button>
             </form>
 

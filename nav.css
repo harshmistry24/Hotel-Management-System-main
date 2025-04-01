@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     padding: 0;
     height: 100vh;
-    background: url('./h1.jpeg') no-repeat center center/cover;
+    /* background: url('./h1.jpeg') no-repeat center center/cover; */
     position: relative;
 
 }
