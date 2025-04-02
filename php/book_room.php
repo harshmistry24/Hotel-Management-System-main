@@ -12,7 +12,6 @@ if (!isset($_SESSION['user_email'])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
-    // $email = $_POST["email"];
     $phone = $_POST["phone"];
     $room_type = $_POST["room_type"];
     $checkin = $_POST["checkin"];

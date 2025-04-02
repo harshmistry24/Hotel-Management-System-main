@@ -12,13 +12,16 @@ if (!isset($_SESSION['user_email'])) {
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!empty($_POST['name']) && !empty($_POST['date']) && !empty($_POST['persons']) && !empty($_POST['eventType']) && !empty($_POST['days']) && !empty($_POST['totalRent'])) {
+    if (!empty($_POST['name']) && !empty($_POST['date']) && !empty($_POST['persons']) && !empty($_POST['eventType']) && !empty($_POST['days'])) {
         $name = $_POST['name'];
         $date = $_POST['date'];
         $persons = $_POST['persons'];
         $eventType = $_POST['eventType'];
         $days = $_POST['days'];
-        $totalRent = $_POST['totalRent'];
+
+        $price_query = "SELECT banquet_price FROM banquet_dining_set WHERE id=1";
+        $result = $conn->query($price_query);
+        $banquet_rent = $result->fetch_assoc()["banquet_price"];
 
         // Check if a booking already exists for the selected date
         $checkStmt = $conn->prepare("SELECT COUNT(*) FROM banquet WHERE date = ?");
@@ -35,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Insert new booking if no booking exists for that date
         $stmt = $conn->prepare("INSERT INTO banquet (name, email, date, persons, event_type, days, total_price) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssi",$name, $user_email, $date, $persons, $eventType, $days, $totalRent);
+        $stmt->bind_param("ssssssi",$name, $user_email, $date, $persons, $eventType, $days, $banquet_rent);
 
         if ($stmt->execute()) {
             $booking_id = $conn->insert_id;
@@ -197,7 +200,11 @@ $conn->close();
         .book-btn { 
             width: 100%; 
             padding: 10px; 
-            background: #28a745; 
+            /* Rose Gold color (below) */
+            /* background: #b76e79;  */
+            /* Burnt Sienna color (below) */
+            /* background: #e97451;  */
+            background: #da9110; 
             color: white; 
             border: none; 
             border-radius: 5px; 
@@ -207,7 +214,7 @@ $conn->close();
         }
 
         .book-btn:hover { 
-            background: #218838; 
+            background:rgb(191, 123, 5); 
         }
     </style>
     
@@ -236,8 +243,7 @@ $conn->close();
         <h1>Banquet Hall Booking</h1>
         <p>Capacity: Up to 1000 people</p>
 
-        <p class="rent">Rent per day: ₹5000</p>
-
+        <p class="rent">Rent per day: ₹<span id="rentPerDayDisplay">5000</span></p>
         <h2>Book Now</h2>
         <form action="" method="POST" onsubmit="return validateForm()">
             <div class="form-group">
@@ -260,20 +266,39 @@ $conn->close();
                 <label for="days">Number of Days:</label>
                 <input type="number" id="days" name="days" min="1" value="1" oninput="calculateRent()" required>
             </div>
-            <p class="rent">Total Rent: ₹<span id="totalRentDisplay">5000</span></p>
-            <input type="hidden" id="totalRent" name="totalRent" value="5000">
+            <p class="rent">Total Rent: ₹<span id="totalRentDisplay">Loading...</span></p>
             <input type="hidden" name="type" value="banquet">
             <button type="submit" class="book-btn">Book Now</button>
         </form>
     </div>
 
     <script>
+       // Global variable to hold the rent per day value
+       let rentPerDay = 0;
+
+        // Fetch rent dynamically from the server
+        async function fetchRent() {
+            try {
+                const response = await fetch("php/get_banquet_rent.php"); // Path to your PHP file
+                if (!response.ok) throw new Error("Failed to fetch rent");
+
+                // Update rentPerDay globally
+                rentPerDay = parseInt(await response.text());
+                document.getElementById("rentPerDayDisplay").textContent = rentPerDay;
+
+                // Call calculateRent() after fetching rent
+                calculateRent();
+            } catch (error) {
+                console.error("Error fetching rent:", error);
+                document.getElementById("rentPerDayDisplay").textContent = "Error fetching rent";
+            }
+        }
+
+        // Calculate and update total rent based on the number of days
         function calculateRent() {
             let days = document.getElementById("days").value;
-            let rentPerDay = 5000;
             let totalRent = days * rentPerDay;
-            document.getElementById("totalRentDisplay").innerText = totalRent;
-            document.getElementById("totalRent").value = totalRent;
+            document.getElementById("totalRentDisplay").textContent = totalRent;
         }
         
         function validatePersons() {
@@ -290,7 +315,7 @@ $conn->close();
             let persons = document.getElementById("persons").value;
             let eventType = document.getElementById("eventType").value;
             let days = document.getElementById("days").value;
-            let totalRent = document.getElementById("totalRent").value;
+            // let totalRent = document.getElementById("totalRent").value;
 
             if (!date) {
                 alert("Please select a booking date.");
@@ -312,12 +337,12 @@ $conn->close();
                 alert("Please enter a valid number of days.");
                 return false;
             }
-            if (!totalRent || totalRent < 5000) {
-                alert("Invalid rent amount.");
-                return false;
-            }
+           
             return true;
         }
+
+        // Fetch rent on page load
+        window.onload = fetchRent;
     </script>
 
     <?php include 'footer.php' ?>

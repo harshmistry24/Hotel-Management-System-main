@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location:admin_login.html");
+    exit();
+}
+
 include 'includes/config.php';
 
 // Fetch existing food menu images
@@ -22,6 +28,7 @@ $result = $conn->query($query);
 
         <div class="content">
             <h2>Manage Food Menu</h2>
+            <br>
 
             <!-- Upload Form -->
             <form action="upload_food_menu.php" method="POST" enctype="multipart/form-data">

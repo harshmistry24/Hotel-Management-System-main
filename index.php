@@ -6,6 +6,7 @@
     <title>Room Booking</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     color:#FF0000;    /* Changes text color to green */
     font-weight: bold; /* Makes the text bold (optional) */
     font-size: 16px; /* Adjusts the text size (optional) */
-}
+    }
 </style>
 
 </head>

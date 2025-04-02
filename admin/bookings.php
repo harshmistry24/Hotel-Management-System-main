@@ -1,9 +1,9 @@
 <?php
-// session_start();
-// if (!isset($_SESSION['admin_logged_in'])) {
-//     header("Location: index.php");
-//     exit();
-// }
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: admin_login.html");
+    exit();
+}
 
 include("includes/config.php");
 

@@ -55,18 +55,19 @@ input {
     transition: 0.3s ease-in-out;
 }
 
-input:focus {
+/* Box border shadow  */
+/* input:focus {
     border-color: #007bff;
     outline: none;
     box-shadow: 0px 0px 4px rgba(0, 123, 255, 0.5);
-}
+} */
 
 /* Submit Button */
 button {
     margin-top: 15px;
     padding: 10px;
     font-size: 16px;
-    background: #007bff;
+    background: #da9110; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -76,7 +77,7 @@ button {
 }
 
 button:hover {
-    background: #0056b3;
+    background:rgb(191, 123, 5); 
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -93,7 +94,7 @@ button:hover {
 #total-price {
     font-size: 18px;
     font-weight: bold;
-    color: #1a237e;
+    color: green;
     margin-top: 8px;
 }
 

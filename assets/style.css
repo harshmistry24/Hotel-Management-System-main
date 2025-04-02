@@ -31,7 +31,7 @@ body {
 .book-btn {
     display: inline-block;
     padding: 10px 20px;
-    background: #007bff;
+    background: #da9110; 
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -39,7 +39,7 @@ body {
 }
 
 .book-btn:hover {
-    background: #0056b3;
+    background:rgb(191, 123, 5); 
 }
 
 form {
@@ -91,14 +91,14 @@ input, select, button {
 }
 
 #availability-form button {
-    background: #007bff;
+    background: #da9110; 
     color: white;
     border: none;
     cursor: pointer;
 }
 
 #availability-form button:hover {
-    background: #0056b3;
+    background:rgb(191, 123, 5); 
 }
 
 #availability-message {

@@ -23,6 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Combine country code and contact number
     $full_contact = $country_code . $contact;
+
+    $price_query = "SELECT dining_deposit FROM banquet_dining_set WHERE id=1";
+    $result = $conn->query($price_query);
+    $dining_deposit = $result->fetch_assoc()["dining_deposit"];
     
      // Validate date (should not be in the past)
      $current_date = date("Y-m-d");
@@ -33,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      }
 
     // Prepare SQL query
-    $stmt = $conn->prepare("INSERT INTO dining (first_name, last_name, email, contact, guests, date, time) VALUES (?, ?, ?, ?, ?, ?,?)");
-    $stmt->bind_param("sssssss", $first_name, $last_name, $user_email, $full_contact, $guests, $date, $time);
+    $stmt = $conn->prepare("INSERT INTO dining (first_name, last_name, email, contact, guests, date, time, total_price) VALUES (?, ?, ?, ?, ?, ?, ?,?)");
+    $stmt->bind_param("sssssssi", $first_name, $last_name, $user_email, $full_contact, $guests, $date, $time, $dining_deposit);
 
     //booking confirmation
     if ($stmt->execute()) {
@@ -171,7 +175,7 @@ $conn->close();
             text-align: center; 
         }
         h2 {
-            color: #d35400;
+            color:rgb(0, 0, 0);
             text-align: center;
         }
         .booking-grid {
@@ -203,7 +207,7 @@ $conn->close();
             width: 80%;
         }
         .book-now {
-            background-color: #d35400;
+            background: #da9110; 
             color: white;
             padding: 12px 20px;
             border: none;
@@ -215,7 +219,7 @@ $conn->close();
             margin-top: 15px;
         }
         .book-now:hover {
-            background-color: #e67e22;
+            background:rgb(191, 123, 5); 
         }
     </style>
 </head>

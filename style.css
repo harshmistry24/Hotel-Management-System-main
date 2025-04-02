@@ -159,13 +159,13 @@ input:focus~label,input:not(:placeholder-shown)~label{
     outline:none;
     border:none;
     width:100%;
-    background:rgb(125,125,235);
+    background: #da9110; 
     color:white;
     cursor:pointer;
     transition:0.9s;
 }
 .btn:hover{
-    background:#07001f;
+    background:rgb(191, 123, 5); 
 }
 .or{
     font-size:1.1rem;
