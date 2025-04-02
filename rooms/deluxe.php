@@ -1,42 +1,9 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Deluxe Room Booking</title>
-    <link rel="stylesheet" href="../assets/style.css">
-    <script src="../assets/script.js" defer></script>
-</head>
-<body>
-    <h2>Deluxe Room Booking</h2>
-    
-    <p id="availability-message" style="font-weight: bold;"></p>
-
-    <p>Price per night: $150</p>
-    <p id="total-price">Total Price: $150</p>
-
-    <form action="../php/book_room.php" method="POST">
-        <input type="hidden" name="room_type" value="Deluxe">
-        <input type="hidden" id="room-price" value="150">
-        <label>Name:</label>
-        <input type="text" name="name" required>
-        <label>Email:</label>
-        <input type="email" name="email" required>
-        <label>Phone:</label>
-        <input type="text" name="phone" required>
-        <label>Check-in Date:</label>
-        <input type="date" name="checkin" id="checkin" required>
-        <label>Check-out Date:</label>
-        <input type="date" name="checkout" id="checkout" required>
-        <button type="submit">Proceed to Payment</button>
-    </form>
-</body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>Deluxe Room Booking</title>
     <link rel="stylesheet" href="../rooms/rooms_style.css">
-    <!-- <script src="../assets/script.js" defer></script> -->
 </head>
 
 <body>
@@ -55,9 +22,6 @@
 
                 <label>Name:</label>
                 <input type="text" name="name" required>
-
-                <!-- <label>Email:</label>
-                <input type="email" name="email" required> -->
 
                 <label>Phone:</label>
                 <input type="text" name="phone" required>

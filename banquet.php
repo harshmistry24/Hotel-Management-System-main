@@ -6,22 +6,20 @@ $user_email = $_SESSION['user_email'];
 include 'db_connect.php';
 
 if (!isset($_SESSION['user_email'])) {
-    echo "<script>alert('You must be logged in to book a table.');
+    echo "<script>alert('You must log in.');
     window.location.href='login.html';</script>"; 
 }
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!empty($_POST['name']) && !empty($_POST['date']) && !empty($_POST['persons']) && !empty($_POST['eventType']) && !empty($_POST['days'])) {
+    if (!empty($_POST['name']) && !empty($_POST['totalRent']) && !empty($_POST['contact']) && !empty($_POST['date']) && !empty($_POST['persons']) && !empty($_POST['eventType']) && !empty($_POST['days'])) {
         $name = $_POST['name'];
+        $contact = $_POST['contact'];
         $date = $_POST['date'];
         $persons = $_POST['persons'];
         $eventType = $_POST['eventType'];
         $days = $_POST['days'];
-
-        $price_query = "SELECT banquet_price FROM banquet_dining_set WHERE id=1";
-        $result = $conn->query($price_query);
-        $banquet_rent = $result->fetch_assoc()["banquet_price"];
+        $banquet_Totalrent = $_POST['totalRent'];
 
         // Check if a booking already exists for the selected date
         $checkStmt = $conn->prepare("SELECT COUNT(*) FROM banquet WHERE date = ?");
@@ -37,18 +35,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Insert new booking if no booking exists for that date
-        $stmt = $conn->prepare("INSERT INTO banquet (name, email, date, persons, event_type, days, total_price) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssi",$name, $user_email, $date, $persons, $eventType, $days, $banquet_rent);
+        $stmt = $conn->prepare("INSERT INTO banquet (name, phone, email, date, persons, event_type, days, total_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssssssi",$name, $contact, $user_email, $date, $persons, $eventType, $days, $banquet_Totalrent);
 
         if ($stmt->execute()) {
             $booking_id = $conn->insert_id;
+            echo "New booking ID is: " . $booking_id;//debugging purpose
 
             $type = $_POST['type'] ?? 'banquet'; // Default to 'banquet' if not set
             // If the type is banquet, redirect or perform specific actions
             if ($type === 'banquet') {
                 header("Location: php/process_payment.php?type=banquet&booking_id=$booking_id");
                 exit();
-        }
+            }
 
         // echo "<script>alert('Booking confirmed!');</script>";
         } else {
@@ -220,7 +219,7 @@ $conn->close();
     
 </head>
 <body>
-    <p class="welcome-text">Welcome to our luxurious banquet hall. Perfect for weddings, parties & corporate events.</p>
+    <p class="welcome-text">Welcome to our luxurious Banquet hall. Perfect for weddings, parties & corporate events.</p>
 
      <!-- IMAGE SLIDER -->
      <div class="slider-container">
@@ -238,7 +237,6 @@ $conn->close();
     <!--js for slider -->
     <script src="assets/js/image_slide.js"></script>
 
-
     <div class="container">
         <h1>Banquet Hall Booking</h1>
         <p>Capacity: Up to 1000 people</p>
@@ -249,6 +247,10 @@ $conn->close();
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="contact">Phone:</label>
+                <input type="tel" name="contact" id="contact" placeholder="Contact Number" maxlength="10" pattern="[6-9][0-9]{9}" required title="Please enter a valid 10-digit mobile number.">
             </div>
             <div class="form-group">
                 <label for="date">Booking Date:</label>
@@ -268,6 +270,8 @@ $conn->close();
             </div>
             <p class="rent">Total Rent: ₹<span id="totalRentDisplay">Loading...</span></p>
             <input type="hidden" name="type" value="banquet">
+            <input type="hidden" id="totalRent" name="totalRent">
+
             <button type="submit" class="book-btn">Book Now</button>
         </form>
     </div>
@@ -299,6 +303,7 @@ $conn->close();
             let days = document.getElementById("days").value;
             let totalRent = days * rentPerDay;
             document.getElementById("totalRentDisplay").textContent = totalRent;
+            document.getElementById("totalRent").value = totalRent; // Store total rent in hidden input field
         }
         
         function validatePersons() {

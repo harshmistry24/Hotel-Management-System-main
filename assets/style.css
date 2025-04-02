@@ -28,6 +28,12 @@ body {
     width: 250px;
 }
 
+.room:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+    }
+
 .book-btn {
     display: inline-block;
     padding: 10px 20px;
@@ -63,11 +69,13 @@ input, select, button {
     margin: 40px auto;
     padding: 20px;
     width: 50%;
-    border-radius: 10px;
+    border-radius: 30px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .availability-section h2 {
+    font-family:playfair;
+    font-size: 30px;
     color: #333;
 }
 
@@ -81,6 +89,9 @@ input, select, button {
 
 #availability-form label {
     font-weight: bold;
+    font-family: playfair;
+    margin-bottom: -15px;
+    margin-top: 10px;
 }
 
 #availability-form input, #availability-form select, #availability-form button {
@@ -91,6 +102,7 @@ input, select, button {
 }
 
 #availability-form button {
+    font-weight: bold;
     background: #da9110; 
     color: white;
     border: none;
@@ -105,6 +117,7 @@ input, select, button {
     font-size: 18px;
     font-weight: bold;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 

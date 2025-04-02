@@ -34,6 +34,7 @@ $stmt = $conn->prepare($query);
 $stmt->bind_param("s", $user_email);
 $stmt->execute();
 $result = $stmt->get_result();
+
 if ($row = $result->fetch_assoc()) {
     $amount = $row['total_price'];
     $booking_id = $row['id'];

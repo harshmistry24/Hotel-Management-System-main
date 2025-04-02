@@ -3,7 +3,7 @@ session_start();
 include 'db_connect.php';
 //upload the email of logged in user to database
 if (!isset($_SESSION['user_email'])) {
-    echo "<script>alert('You must be logged in to book a table.');
+    echo "<script>alert('You must log in.');
     window.location.href='login.html';</script>"; 
 }
 
@@ -254,16 +254,10 @@ $conn->close();
                     <input type="text" name="last_name" placeholder="Last Name" required>
                 </div>
                 <div class="input-group">
-                    <select name="country_code">
-                        <option>+91</option>
-                        <option>+1</option>
-                        <option>+44</option>
-                        <option>+61</option>
-                    </select>
-                    <input type="tel" name="contact" id="contact" placeholder="Contact Number" required>
+                    <input type="tel" name="contact" id="contact" placeholder="Contact Number" maxlength="10" pattern="[6-9][0-9]{9}" required title="Please enter a valid 10-digit mobile number">
                 </div>
                 <div class="input-group">
-                    <input type="number" name="guests" placeholder="Number of Guests" min="1" required>
+                    <input type="number" name="guests" placeholder="Number of Guests" min="1" max="10" required>
                 </div>
                 <div class="input-group">
                     <input type="date" name="date" required>
