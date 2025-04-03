@@ -3,10 +3,11 @@ body {
     font-family: Arial, sans-serif;
     padding: 0;
     height: 100vh;
+    /* background: url('./h1.jpeg') no-repeat center center/cover; */
     position: relative;
+
 }
 
-/* Navbar */
 .navbar {
     display: flex;
     align-items: center;
@@ -16,7 +17,6 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo */
 .logo {
     display: flex;
     align-items: center;
@@ -33,7 +33,6 @@ body {
     color: #333;
 }
 
-/* Navigation Links */
 .nav-links {
     list-style: none;
     display: flex;
@@ -43,22 +42,35 @@ body {
 }
 
 .nav-links li {
-    display: inline-block;
+    display: inline;
 }
 
 .nav-links a {
     text-decoration: none;
     color: #333;
     font-size: 16px;
-    font-weight: 600;
-    font-family: playfair;
+    font-weight: 500;
 }
 
 .nav-links a:hover {
     color: #0071c2;
 }
 
-/* Sign-In Button */
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.language-btn {
+    background: none;
+    border: 1px solid #333;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
 .signin-btn {
     background-color: #5e3b8b;
     color: white;
@@ -77,82 +89,7 @@ body {
     background-color: #4a2e70;
 }
 
-/* Hamburger Menu (Hidden by Default) */
-.menu-icon {
-    display: none;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-/* Sidebar Menu */
-.sidebar {
-    position: fixed;
-    left: -250px;
-    top: 0;
-    width: 250px;
-    height: 100%;
-    background: white;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
-    transition: left 0.3s ease-in-out;
-    padding-top: 60px;
-}
-
-.sidebar.active {
-    left: 0;
-}
-
-.sidebar .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor:pointer;
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-} 
-
-.sidebar ul li a {
-    text-decoration: none;
-    color: #000000;
-    font-size: 16px;
-    display: block;
-}
-
-.sidebar button{
-    background-color: #5e3b8b;
-    color: white;
-    border: none;
-    padding: 9px 60px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-top: 10px;
-    
-}
-
-.sidebar button:hover{
-    background-color: #4a2e70;
-}
-
-/* Responsive Design */
-@media (max-width: 935px) {
-    .nav-links, .nav-buttons {
-        display: none;
-    }
-
-    .menu-icon {
-        display: block;
-    }
-}
-
+/* FOOTER */
 .footer {
     background-color: #333;
     color: white;
