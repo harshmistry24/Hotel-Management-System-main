@@ -9,13 +9,6 @@ if (!isset($_SESSION['user_email'])) {
 }
 
 $user_email = $_SESSION['user_email'];
-
-// Fetch reservations
-$query = "SELECT * FROM bookings WHERE email = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("s", $user_email);
-$stmt->execute();
-$result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +29,16 @@ $result = $stmt->get_result();
 <div class="reservation-container">
     <h2>My Reservations</h2>
 
+    <!-- Room Reservations -->
+    <h3>Room Bookings</h3>
+    <?php
+    $query = "SELECT * FROM bookings WHERE email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $user_email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    ?>
+    
     <?php if ($result->num_rows > 0): ?>
         <table class="reservation-table">
             <tr>
@@ -56,7 +59,75 @@ $result = $stmt->get_result();
             <?php endwhile; ?>
         </table>
     <?php else: ?>
-        <p>No reservations found.</p>
+        <p>No room bookings found.</p>
+    <?php endif; ?>
+
+    <!-- Banquet Reservations -->
+    <h3>Banquet Bookings</h3>
+    <?php
+    $query = "SELECT * FROM banquet WHERE email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $user_email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    ?>
+    
+    <?php if ($result->num_rows > 0): ?>
+        <table class="reservation-table">
+            <tr>
+                <th>Booking ID</th>
+                <th>Event Type</th>
+                <th>Date</th>
+                <th>Persons</th>
+                <th>Days</th>
+                <th>Amount Paid</th>
+            </tr>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['event_type']; ?></td>
+                    <td><?php echo $row['date']; ?></td>
+                    <td><?php echo $row['persons']; ?></td>
+                    <td><?php echo $row['days']; ?></td>
+                    <td><?php echo $row['total_price']; ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+    <?php else: ?>
+        <p>No banquet bookings found.</p>
+    <?php endif; ?>
+
+    <!-- Dining Reservations -->
+    <h3>Dining Bookings</h3>
+    <?php
+    $query = "SELECT * FROM dining WHERE email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $user_email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    ?>
+    
+    <?php if ($result->num_rows > 0): ?>
+        <table class="reservation-table">
+            <tr>
+                <th>Booking ID</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Guest Count</th>
+                <th>Deposit Paid</th>
+            </tr>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['date']; ?></td>
+                    <td><?php echo $row['time']; ?></td>
+                    <td><?php echo $row['guests']; ?></td>
+                    <td><?php echo $row['total_price']; ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+    <?php else: ?>
+        <p>No dining bookings found.</p>
     <?php endif; ?>
 
     <a href="home.php" class="back-btn">Back to Home</a>

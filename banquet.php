@@ -277,6 +277,13 @@ $conn->close();
     </div>
 
     <script>
+        // Disable past dates in date picker
+        function disablePastDates() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById("date").setAttribute("min", today);
+        }
+
+
        // Global variable to hold the rent per day value
        let rentPerDay = 0;
 
@@ -346,8 +353,67 @@ $conn->close();
             return true;
         }
 
+        let bookedDates = [];
+
+    async function fetchBookedDates() {
+    try {
+        const response = await fetch("php/fetch_booked_date_banq.php");
+        if (!response.ok) throw new Error("Failed to fetch booked dates");
+        bookedDates = await response.json();
+        console.log("Booked Dates:", bookedDates); // Debugging
+    } catch (error) {
+        console.error("Error fetching booked dates:", error);
+    }
+}
+
+// Disable booking if the selected range overlaps with bookedDates
+function checkAvailability() {
+    const startDateStr = document.getElementById("date").value;
+    const days = parseInt(document.getElementById("days").value) || 1;
+    const bookBtn = document.querySelector(".book-btn");
+
+    if (!startDateStr) return;
+
+    const startDate = new Date(startDateStr);
+    let isUnavailable = false;
+
+    for (let i = 0; i < days; i++) {
+        const checkDate = new Date(startDate);
+        checkDate.setDate(startDate.getDate() + i);
+        const formatted = checkDate.toISOString().split('T')[0];
+
+        if (bookedDates.includes(formatted)) {
+            isUnavailable = true;
+            break;
+        }
+    }
+
+    if (isUnavailable) {
+        bookBtn.disabled = true;
+        bookBtn.textContent = "Not Available on the selected date";
+        bookBtn.style.backgroundColor = "gray";
+    } else {
+        bookBtn.disabled = false;
+        bookBtn.textContent = "Book Now";
+        bookBtn.style.backgroundColor = "#da9110";
+    }
+}
+
+// Hook availability check on inputs
+document.getElementById("date").addEventListener("change", checkAvailability);
+document.getElementById("days").addEventListener("input", () => {
+    calculateRent(); // Keep rent updated
+    checkAvailability(); // Check availability
+});
+
         // Fetch rent on page load
-        window.onload = fetchRent;
+        // window.onload = fetchRent;
+        window.onload = function () {
+            fetchRent();
+            fetchBookedDates();
+            disablePastDates();
+        };
+
     </script>
 
     <?php include 'footer.php' ?>

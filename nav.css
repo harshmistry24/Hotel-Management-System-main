@@ -55,7 +55,9 @@ body {
 }
 
 .nav-links a:hover {
-    color: #0071c2;
+    color: #d98d2f;
+    
+    
 }
 
 /* Sign-In Button */
@@ -124,6 +126,11 @@ body {
     color: #000000;
     font-size: 16px;
     display: block;
+}
+
+.sidebar ul li a:hover{
+    color: #d98d2f;
+
 }
 
 .sidebar button{

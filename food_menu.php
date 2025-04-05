@@ -40,7 +40,7 @@ $result = $conn->query($query);
         text-align: center;
         margin: 24px 16px 12px 16px;
         padding: 2rem 0;
-        background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+        background: linear-gradient(135deg, #da9110, #00a4e0bd);
         border-radius: 15px;
         color: white;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);

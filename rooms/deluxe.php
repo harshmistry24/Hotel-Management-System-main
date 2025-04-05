@@ -1,3 +1,21 @@
+<?php
+include("../php/db_connect.php");
+
+$room_type = "Deluxe";
+$room_price = 0; // Default price
+
+// Fetch dynamic pricing from the database
+$query = "SELECT price FROM rooms WHERE room_type='$room_type'";
+$result = $conn->query($query);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $room_price = $row["price"];
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,13 +30,13 @@
 
         <p id="availability-message" style="font-weight: bold; color: red;"></p>
 
-        <p>Price per night: 150</p>
-        <p id="total-price">Total Price: 150</p>
+        <p>Price per night: <span id="room-price-display"><?php echo $room_price; ?></span></p>
+        <p id="total-price">Total Price: <?php echo $room_price; ?></p>
 
         <div class="form-box">
             <form action="../php/book_room.php" method="POST" onsubmit="return validateForm()">
                 <input type="hidden" name="room_type" value="Deluxe">
-                <input type="hidden" id="room-price" value="150">
+                <input type="hidden" id="room-price" value="<?php echo $room_price; ?>">
 
                 <label>Name:</label>
                 <input type="text" name="name" required>
@@ -33,7 +51,7 @@
                 <input type="date" name="checkout" id="checkout" required>
 
                 <input type="hidden" name="type" value="room">
-                <button type="submit" id="submit-btn" >Proceed to Payment</button>
+                <button type="submit" id="submit-btn" class="disable-btn" disabled>Proceed to Payment</button>
             </form>
 
             <button onclick="history.back()" class="go-back-btn">Go Back</button>
@@ -49,7 +67,9 @@
             let availabilityMessage = document.getElementById("availability-message");
             let submitBtn = document.getElementById("submit-btn");
 
-          
+            //Disable button initially
+            submitBtn.disabled = true;
+            submitBtn.classList.add("disabled-btn"); 
 
             // Prevent past dates for check-in
             let today = new Date().toISOString().split("T")[0];
@@ -92,10 +112,11 @@
                             availabilityMessage.innerHTML = data;
                             if (data.includes("available")) {
                                 availabilityMessage.style.color = "green";
-                                submitBtn.removeAttribute("disabled");
+                                // submitBtn.removeAttribute("disabled");
+                                submitBtn.classList.remove("disabled-btn");
                             } else {
                                 availabilityMessage.style.color = "red";
-                                submitBtn.setAttribute("disabled", "true");
+                                // submitBtn.setAttribute("disabled", "true");
                             }
                         })
                         .catch(error => console.error("Error:", error));

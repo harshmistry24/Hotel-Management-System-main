@@ -1,10 +1,24 @@
 <?php
 session_start();
+
+date_default_timezone_set("Asia/Kolkata"); // Set to your desired timezone
+
 include 'db_connect.php';
 //upload the email of logged in user to database
 if (!isset($_SESSION['user_email'])) {
     echo "<script>alert('You must log in.');
     window.location.href='login.html';</script>"; 
+}
+
+$dining_deposit = 0; // Default price
+
+// Fetch dynamic pricing from the database
+$query = "SELECT dining_deposit FROM banquet_dining_set WHERE id='1' ";
+$result = $conn->query($query);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $dining_deposit = $row["dining_deposit"];
 }
 
 $user_email = $_SESSION['user_email'];
@@ -15,14 +29,10 @@ $user_email = $_SESSION['user_email'];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
-    $country_code = $_POST['country_code'];
     $contact = $_POST['contact'];
     $guests = $_POST['guests'];
     $date = $_POST['date'];
     $time = $_POST['time'];
-
-    // Combine country code and contact number
-    $full_contact = $country_code . $contact;
 
     $price_query = "SELECT dining_deposit FROM banquet_dining_set WHERE id=1";
     $result = $conn->query($price_query);
@@ -38,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Prepare SQL query
     $stmt = $conn->prepare("INSERT INTO dining (first_name, last_name, email, contact, guests, date, time, total_price) VALUES (?, ?, ?, ?, ?, ?, ?,?)");
-    $stmt->bind_param("sssssssi", $first_name, $last_name, $user_email, $full_contact, $guests, $date, $time, $dining_deposit);
+    $stmt->bind_param("sssssssi", $first_name, $last_name, $user_email, $contact, $guests, $date, $time, $dining_deposit);
 
     //booking confirmation
     if ($stmt->execute()) {
@@ -216,7 +226,7 @@ $conn->close();
             font-size: 18px;
             transition: 0.3s;
             width: 100%;
-            margin-top: 15px;
+            /* margin-top: 15px; */
         }
         .book-now:hover {
             background:rgb(191, 123, 5); 
@@ -260,36 +270,85 @@ $conn->close();
                     <input type="number" name="guests" placeholder="Number of Guests" min="1" max="10" required>
                 </div>
                 <div class="input-group">
-                    <input type="date" name="date" required>
+                    <input type="date" name="date" id="date" required>
                     <input type="time" name="time" min="09:00" max="23:00" required>
                 </div>
+
+                <p><i>You have to pay the minimal fix deposit of <b>₹<span id="fix-deposit"><?php echo $dining_deposit; ?></span></i></b></p>
+
                 <input type="hidden" name="type" value="dining">
-                <button type="submit" class="book-now" >Book Now</button>
+                <button type="submit" class="book-now" id="book-now">Book Now</button>
+                <p id="availabilityMessage" style="color: red; text-align: center;"></p>
+                
             </div>
         </form>
         <p id="confirmation" style="color: red; margin-top: 10px; text-align: center;"></p>
     </div>
 
     <script>
-        document.querySelector("form").addEventListener("submit", function(event) {
-            let firstName = document.querySelector("input[name='first_name']").value;
-            let lastName = document.querySelector("input[name='last_name']").value;
-            let contact = document.querySelector("input[name='contact']").value;
-            let guests = document.querySelector("input[name='guests']").value;
-            let date = document.querySelector("input[name='date']").value;
-            let time = document.querySelector("input[name='time']").value;
+    document.addEventListener("DOMContentLoaded", function () {
+    let form = document.querySelector("form");
+    let dateInput = document.querySelector("input[name='date']");
+    let timeInput = document.querySelector("input[name='time']");
+    let submitBtn = document.getElementById("book-now");
+    let confirmationMsg = document.getElementById("confirmation");
 
-            let today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+    function checkAvailability() {
+        let date = dateInput.value;
+        let time = timeInput.value;
 
-            if (!firstName || !lastName || !contact || !guests || !date || !time) {
-                event.preventDefault();
-                document.getElementById("confirmation").innerText = "⚠️ Please fill all details correctly.";
-            }else if (date < today) {
-                event.preventDefault();
-                document.getElementById("confirmation").innerText = "⚠️ Invalid date! Please select a valid date.";
+        if (date && time) {
+            fetch(`check_dining_available.php?date=${date}&time=${time}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.available) {
+                        submitBtn.disabled = false;
+                        confirmationMsg.innerText = ""; // Clear message
+                    } else {
+                        submitBtn.disabled = true;
+                        confirmationMsg.innerText = "No available slots for this time.";
+                    }
+                })
+                .catch(error => console.error("Error checking availability:", error));
+        }
     }
-        });
-    </script>
+
+    // Trigger availability check when date or time changes
+    dateInput.addEventListener("change", checkAvailability);
+    timeInput.addEventListener("change", checkAvailability);
+
+    // Form validation with availability check
+    form.addEventListener("submit", function (event) {
+        let firstName = document.querySelector("input[name='first_name']").value;
+        let lastName = document.querySelector("input[name='last_name']").value;
+        let contact = document.querySelector("input[name='contact']").value;
+        let guests = document.querySelector("input[name='guests']").value;
+        let date = dateInput.value;
+        let time = timeInput.value;
+
+        let today = new Date().toISOString().split("T")[0]; // Get today's date in YYYY-MM-DD format
+
+        if (!firstName || !lastName || !contact || !guests || !date || !time) {
+            event.preventDefault();
+            confirmationMsg.innerText = "Please fill all details correctly.";
+        } else if (date < today) {
+            event.preventDefault();
+            confirmationMsg.innerText = "Invalid date! Please select a valid date.";
+        } else if (submitBtn.disabled) {
+            event.preventDefault();
+            confirmationMsg.innerText = "No available slots for this time.";
+        }
+    });
+    });
+    // Disable past dates in date picker
+function disablePastDates() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById("date").setAttribute("min", today);
+}
+window.onload = function () {
+            disablePastDates();
+        };
+</script>
 
     <!-- Footer -->
     <?php include 'footer.php' ?>
