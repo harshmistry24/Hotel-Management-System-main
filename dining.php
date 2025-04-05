@@ -185,6 +185,8 @@ $conn->close();
             text-align: center; 
         }
         h2 {
+            font-family:playfair;
+            font-size: 30px;
             color:rgb(0, 0, 0);
             text-align: center;
         }
@@ -242,11 +244,12 @@ $conn->close();
      <!-- IMAGE SLIDER -->
      <div class="slider-container">
         <div class="slider">
-            <div class="slide"><img src="HMSimages/6.png" alt="Luxury Hotel"></div>
-            <div class="slide"><img src="HMSimages/duplex.jpg" alt="Comfortable Rooms"></div>
-            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
-            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
-            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+            <div class="slide"><img src="HMSimages/Dining_img/din.jpg" alt="Dining Image"></div>
+            <div class="slide"><img src="HMSimages/Dining_img/a1.jpg" alt="Dining Image"></div>
+            <div class="slide"><img src="HMSimages/Dining_img/din.jpg" alt="Dining Image"></div>
+            <div class="slide"><img src="HMSimages/Dining_img/dinfood.png" alt="Dining Image"></div>
+            <div class="slide"><img src="HMSimages/Dining_img/fooddin.jpeg" alt="Dining Image"></div>
+            <div class="slide"><img src="HMSimages/Dining_img/dincook.jpg" alt="Dining Image"></div>
         </div>
         <button class="prev" onclick="prevSlide()">&#10094;</button>
         <button class="next" onclick="nextSlide()">&#10095;</button>

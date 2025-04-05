@@ -104,3 +104,16 @@ th {
 .update-btn:hover {
     background: #218838;
 }
+
+.delete-btn {
+    padding: 8px 12px;
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background: rgba(255, 0, 0, 0.702);
+}

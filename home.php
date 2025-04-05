@@ -45,11 +45,40 @@ if (!isset($_SESSION['user_id'])) {
     <!-- IMAGE SLIDER -->
     <div class="slider-container">
         <div class="slider">
-            <div class="slide"><img src="HMSimages/6.png" alt="Luxury Hotel"></div>
-            <div class="slide"><img src="HMSimages/duplex.jpg" alt="Comfortable Rooms"></div>
-            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
-            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
-            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+            <div class="slide"><img src="HMSimages/h1.jpeg" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/7.png" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/8.jpg" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/hotel3.jpg" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/4.jpg" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/pool.jpg" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/2.jpg" alt="Hotel Image"></div>
+            <!-- Room image -->
+            <div class="slide"><img src="HMSimages/Room_img/1.jpg" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/Room_img/3.jpg" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/Room_img/6.jpg" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/Room_img/6.jpg" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/Room_img/duplex.jpg" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/Room_img/suite.png" alt="Hotel Image"></div>
+            <div class="slide"><img src="HMSimages/Room_img/g4.jpg" alt="Hotel Image"></div>
+            <!-- Banquet img -->
+            <div class="slide"><img src="HMSimages/Banquet_img/1.jpg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/2.jpg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/3.jpg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/1.png" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/5.jpeg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/2.png" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/3.png" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/1227.jpg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/7.jpeg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/8.jpg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/4.jpg" alt="Banquet Image"></div>
+            <!-- Dining img -->
+            <div class="slide"><img src="HMSimages/Dining_img/din.jpg" alt="Dining Image"></div>
+            <div class="slide"><img src="HMSimages/Dining_img/a1.jpg" alt="Dining Image"></div>
+            <div class="slide"><img src="HMSimages/Dining_img/din.jpg" alt="Dining Image"></div>
+            <div class="slide"><img src="HMSimages/Dining_img/dinfood.png" alt="Dining Image"></div>
+            <div class="slide"><img src="HMSimages/Dining_img/fooddin.jpeg" alt="Dining Image"></div>
+            <div class="slide"><img src="HMSimages/Dining_img/dincook.jpg" alt="Dining Image"></div>
         </div>
         <button class="prev" onclick="prevSlide()">&#10094;</button>
         <button class="next" onclick="nextSlide()">&#10095;</button>

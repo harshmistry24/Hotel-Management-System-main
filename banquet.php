@@ -224,11 +224,17 @@ $conn->close();
      <!-- IMAGE SLIDER -->
      <div class="slider-container">
         <div class="slider">
-            <div class="slide"><img src="HMSimages/6.png" alt="Luxury Hotel"></div>
-            <div class="slide"><img src="HMSimages/duplex.jpg" alt="Comfortable Rooms"></div>
-            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
-            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
-            <div class="slide"><img src="HMSimages/a1.jpg" alt="Amazing Views"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/1.jpg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/2.jpg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/3.jpg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/1.png" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/5.jpeg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/2.png" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/3.png" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/1227.jpg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/7.jpeg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/8.jpg" alt="Banquet Image"></div>
+            <div class="slide"><img src="HMSimages/Banquet_img/4.jpg" alt="Banquet Image"></div>
         </div>
         <button class="prev" onclick="prevSlide()">&#10094;</button>
         <button class="next" onclick="nextSlide()">&#10095;</button>

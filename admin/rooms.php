@@ -14,22 +14,22 @@ if (isset($_GET["id"])) {
     header("Location: rooms.php");
 }
 
-// Handle room addition
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_room"])) {
-    $room_type = $_POST["room_type"];
-    $price = $_POST["price"];
-    $total_rooms = $_POST["total_rooms"];
+// // Handle room addition
+// if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_room"])) {
+//     $room_type = $_POST["room_type"];
+//     $price = $_POST["price"];
+//     $total_rooms = $_POST["total_rooms"];
 
-    $query = "INSERT INTO rooms (room_type, price, total_rooms) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("sii", $room_type, $price, $total_rooms);
+//     $query = "INSERT INTO rooms (room_type, price, total_rooms) VALUES (?, ?, ?)";
+//     $stmt = $conn->prepare($query);
+//     $stmt->bind_param("sii", $room_type, $price, $total_rooms);
     
-    if ($stmt->execute()) {
-        $success_message = "Room added successfully!";
-    } else {
-        $error_message = "Error adding room.";
-    }
-}
+//     if ($stmt->execute()) {
+//         $success_message = "Room added successfully!";
+//     } else {
+//         $error_message = "Error adding room.";
+//     }
+// }
 
 // Handle room update
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update_room"])) {
@@ -68,7 +68,7 @@ $rooms = $conn->query("SELECT * FROM rooms");
         <?php if (isset($error_message)) echo "<p class='error'>$error_message</p>"; ?>
 
         <br>
-        <h3>Add New Room</h3>
+        <!-- <h3>Add New Room</h3>
         <form method="POST">
             <input type="text" name="room_type" placeholder="Room Type" required>
             <input type="number" name="price" placeholder="Price per Night" required>
@@ -77,7 +77,7 @@ $rooms = $conn->query("SELECT * FROM rooms");
         </form>
 
         <br>
-        <h3>Existing Rooms</h3>
+        <h3>Existing Rooms</h3> -->
         <table>
             <tr>
                 <th>ID</th>
@@ -99,8 +99,8 @@ $rooms = $conn->query("SELECT * FROM rooms");
                             <input type="number" name="total_rooms" value="<?php echo $room['total_rooms']; ?>" required>
                         </td>
                         <td>
-                            <button type="submit" name="update_room">Update</button>
-                            <a href="rooms.php?id=<?php echo $room['id']; ?>" onclick="return confirm('Are you sure you want to DELETE the room?');">Delete</a>
+                            <button type="submit" name="update_room" class="update-btn">Update</button>
+                            <!-- <a href="rooms.php?id=<?php echo $room['id']; ?>" onclick="return confirm('Are you sure you want to DELETE the room?');">Delete</a> -->
                         </td>
                     </form>
                 </tr>
