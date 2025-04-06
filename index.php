@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     <div class="rooms">
         <div class="room">
-            <img src="HMSimages/duplex.jpg" alt="deluxe room" width="250" height="250" />
+            <img src="HMSimages/Room_img/duplex.jpg" alt="deluxe room" width="250" height="250" />
             <h2>Deluxe Room</h2>
             <p>Luxury and comfort.</p>
             <a href="rooms/deluxe.php" class="book-btn">Book Now</a>

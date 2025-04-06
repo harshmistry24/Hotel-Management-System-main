@@ -89,7 +89,7 @@ if (!isset($_SESSION['user_id'])) {
 
     <div class="rooms">
         <div class="room">
-            <img src="HMSimages/duplex.jpg" alt="deluxe room" width="250" height="250" />
+            <img src="HMSimages/Room_img/duplex.jpg" alt="deluxe room" width="250" height="250" />
             <h2>Deluxe Room</h2>
             <p>Luxury and comfort.</p>
         </div>
