@@ -94,12 +94,12 @@ if (!isset($_SESSION['user_id'])) {
             <p>Luxury and comfort.</p>
         </div>
         <div class="room">
-            <img src="HMSimages/suite.png" alt="suite room" width="250" height="250" />
+            <img src="HMSimages/Room_img/suite.png" alt="suite room" width="250" height="250" />
             <h2>Suite</h2>
             <p>Spacious and elegant.</p>
         </div>
         <div class="room">
-            <img src="HMSimages/6.png" alt="Standard room" width="250" height="250" />
+            <img src="HMSimages/Room_img/6.png" alt="Standard room" width="250" height="250" />
             <h2>Standard Room</h2>
             <p>Affordable and cozy.</p>
         </div>

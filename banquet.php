@@ -169,6 +169,7 @@ $conn->close();
         }
 
         h1, h2 { 
+            font-family:playfair;
             color: #333; 
         }
 
@@ -248,7 +249,6 @@ $conn->close();
         <p>Capacity: Up to 1000 people</p>
 
         <p class="rent">Rent per day: ₹<span id="rentPerDayDisplay">5000</span></p>
-        <h2>Book Now</h2>
         <form action="" method="POST" onsubmit="return validateForm()">
             <div class="form-group">
                 <label for="name">Name:</label>
