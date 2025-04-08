@@ -12,6 +12,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     <style>
+        .room ul {
+            padding: 6px;
+            margin: 10px 0;
+        }
+
+        .room ul li {
+            list-style: none;         /* Removes bullet points */
+            text-align: left;         /* Align text to the left */
+            font-size: 16px;
+            display: flex;            /* Align icon and text side by side */
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .room ul li i {
+            font-size: 22px;          /* Icon size */
+            color: #444;              /* Optional: icon color */
+            margin-right: 10px;       /* Space between icon and text */
+        }
+
         a {
             color: aliceblue;
             text-decoration: none;
@@ -132,22 +152,45 @@
     <script src="assets/js/image_slide.js"></script>
 
     <div class="rooms">
-        <div class="room">
-            <img src="HMSimages/Room_img/duplex.jpg" alt="deluxe room" width="250" height="250" />
-            <h2>Deluxe Room</h2>
-            <p>Luxury and comfort.</p>
-        </div>
-        <div class="room">
-            <img src="HMSimages/Room_img/suite.png" alt="suite room" width="250" height="250" />
-            <h2>Suite</h2>
-            <p>Spacious and elegant.</p>
-        </div>
-        <div class="room">
-            <img src="HMSimages/Room_img/6.png" alt="Standard room" width="250" height="250" />
-            <h2>Standard Room</h2>
-            <p>Affordable and cozy.</p>
-        </div>
+    <div class="room">
+        <img src="HMSimages/Room_img/duplex.jpg" alt="Deluxe Room" width="250" height="250" />
+        <h2>Deluxe Room</h2>
+        <ul>
+            <li><i class="fas fa-bed"></i> King-sized beds</li>
+            <li><i class="fas fa-city"></i> Modern interior with city view</li>
+            <li><i class="fas fa-utensils"></i> Complimentary breakfast</li>
+            <li><i class="fas fa-wifi"></i> Free high-speed Wi-Fi</li>
+            <li><i class="fas fa-tv"></i> Smart TV & workspace</li>
+        </ul>
+        <a href="rooms/deluxe.php" class="book-btn">Book Now</a>
     </div>
+
+    <div class="room">
+        <img src="HMSimages/Room_img/suite.png" alt="Suite Room" width="250" height="250" />
+        <h2>Suite</h2>
+        <ul>
+            <li><i class="fas fa-door-open"></i> Spacious suite with living area</li>
+            <li><i class="fas fa-bed"></i> Luxurious king bed</li>
+            <li><i class="fas fa-mountain"></i> Private balcony</li>
+            <li><i class="fas fa-bath"></i> Jacuzzi bathtub</li>
+            <li><i class="fas fa-concierge-bell"></i> 24/7 Room Service</li>
+        </ul>
+        <a href="rooms/suite.php" class="book-btn">Book Now</a>
+    </div>
+
+    <div class="room">
+        <img src="HMSimages/Room_img/6.png" alt="Standard Room" width="250" height="250" />
+        <h2>Standard Room</h2>
+        <ul>
+            <li><i class="fas fa-bed"></i> Single bed</li>
+            <li><i class="fas fa-wind"></i> Air conditioning</li>
+            <li><i class="fas fa-tv"></i> Flat-screen TV</li>
+            <li><i class="fas fa-toilet"></i> Attached bathroom</li>
+            <li><i class="fas fa-wifi"></i> Free Wi-Fi access</li>
+        </ul>
+        <a href="rooms/standard.php" class="book-btn">Book Now</a>
+    </div>
+</div>
 
     <section class="services">
         <h2>Our Services</h2>

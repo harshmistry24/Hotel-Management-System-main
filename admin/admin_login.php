@@ -31,7 +31,7 @@ if(isset($_POST['signIn'])){
         
         $_SESSION['email'] = $user_email;
 
-        header("Location: dashboard.php"); // Redirect to dashboard
+        header("Location: bookings.php"); // Redirect to dashboard
         exit();
     } else {
         echo "<script>

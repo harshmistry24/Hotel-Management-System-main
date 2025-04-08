@@ -6,11 +6,11 @@
     <title>Room Booking</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="nav.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("availability-form").addEventListener("submit", function (event) {
+        document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("availability-form").addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent default form submission
 
         let formData = new FormData(this);
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             errorElement.innerHTML = "<span class='error'>Error checking availability.</span>";
         });
-    });
+      });
     
         // function validateForm() {
         //     let check_in = document.getElementById("checkin").value;
@@ -59,9 +59,28 @@ document.addEventListener("DOMContentLoaded", function () {
             checkoutInput.setAttribute("min", checkinDate); // Set min checkout date
         });
         
-    });
+     });
     </script>
 <style>
+    .room ul {
+        padding: 6px;
+        margin: 10px 0;
+    }
+
+    .room ul li {
+        list-style: none;         /* Removes bullet points */
+        text-align: left;         /* Align text to the left */
+        font-size: 16px;
+        display: flex;            /* Align icon and text side by side */
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .room ul li i {
+        font-size: 22px;          /* Icon size */
+        color: #444;              /* Optional: icon color */
+        margin-right: 10px;       /* Space between icon and text */
+    }
     .success {
         color: green; /* Changes text color to green */
         font-weight: bold; /* Makes the text bold (optional) */
@@ -110,25 +129,46 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
 
     <div class="rooms">
-        <div class="room">
-            <img src="HMSimages/Room_img/duplex.jpg" alt="deluxe room" width="250" height="250" />
-            <h2>Deluxe Room</h2>
-            <p>Luxury and comfort.</p>
-            <a href="rooms/deluxe.php" class="book-btn">Book Now</a>
-        </div>
-        <div class="room">
-             <img src="HMSimages/Room_img/suite.png" alt="suite room" width="250" height="250" />
-            <h2>Suite</h2>
-            <p>Spacious and elegant.</p>
-            <a href="rooms/suite.php" class="book-btn">Book Now</a>
-        </div>
-        <div class="room">
-            <img src="HMSimages/Room_img/6.png" alt="Standard room" width="250" height="250" />
-            <h2>Standard Room</h2>
-            <p>Affordable and cozy.</p>
-            <a href="rooms/standard.php" class="book-btn">Book Now</a>
-        </div>
+    <div class="room">
+        <img src="HMSimages/Room_img/duplex.jpg" alt="Deluxe Room" width="250" height="250" />
+        <h2>Deluxe Room</h2>
+        <ul>
+            <li><i class="fas fa-bed"></i> King-sized beds</li>
+            <li><i class="fas fa-city"></i> Modern interior with city view</li>
+            <li><i class="fas fa-utensils"></i> Complimentary breakfast</li>
+            <li><i class="fas fa-wifi"></i> Free high-speed Wi-Fi</li>
+            <li><i class="fas fa-tv"></i> Smart TV & workspace</li>
+        </ul>
+        <a href="rooms/deluxe.php" class="book-btn">Book Now</a>
     </div>
+
+    <div class="room">
+        <img src="HMSimages/Room_img/suite.png" alt="Suite Room" width="250" height="250" />
+        <h2>Suite</h2>
+        <ul>
+            <li><i class="fas fa-door-open"></i> Spacious suite with living area</li>
+            <li><i class="fas fa-bed"></i> Luxurious king bed</li>
+            <li><i class="fas fa-mountain"></i> Private balcony</li>
+            <li><i class="fas fa-bath"></i> Jacuzzi bathtub</li>
+            <li><i class="fas fa-concierge-bell"></i> 24/7 Room Service</li>
+        </ul>
+        <a href="rooms/suite.php" class="book-btn">Book Now</a>
+    </div>
+
+    <div class="room">
+        <img src="HMSimages/Room_img/6.png" alt="Standard Room" width="250" height="250" />
+        <h2>Standard Room</h2>
+        <ul>
+            <li><i class="fas fa-bed"></i> Single bed</li>
+            <li><i class="fas fa-wind"></i> Air conditioning</li>
+            <li><i class="fas fa-tv"></i> Flat-screen TV</li>
+            <li><i class="fas fa-toilet"></i> Attached bathroom</li>
+            <li><i class="fas fa-wifi"></i> Free Wi-Fi access</li>
+        </ul>
+        <a href="rooms/standard.php" class="book-btn">Book Now</a>
+    </div>
+</div>
+
 
     <!-- Footer -->
     <?php include 'footer.php'; ?>

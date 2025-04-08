@@ -3,7 +3,7 @@
         <!-- <img src="a_assets/1logo.png" alt="The President LOGO" class="logo"> -->
         <h2>Hotel Admin</h2>
         <ul>
-            <li><a href="dashboard.php"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <!-- <li><a href="dashboard.php"><i class="fas fa-chart-line"></i> Dashboard</a></li> -->
             <li><a href="bookings.php"><i class="fas fa-calendar-check"></i> Bookings</a></li>
             <li><a href="users.php"><i class="fas fa-user"></i> Users</a></li>
             <li><a href="rooms.php"><i class="fas fa-bed"></i> Rooms</a></li>
