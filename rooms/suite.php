@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location:login.html");
+    exit();
+}
+
 include("../php/db_connect.php");
 
 $room_type = "Suite";
@@ -42,7 +48,7 @@ $conn->close();
                 <input type="text" name="name" required>
 
                 <label>Phone:</label>
-                <input type="text" name="phone" required>
+                <input type="tel" name="phone" maxlength="10" pattern="[6-9][0-9]{9}" required title="Please enter a valid 10-digit mobile number">
 
                 <label>Check-in Date:</label>
                 <input type="date" name="checkin" id="checkin" required>

@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location:login.html");
+    exit();
+}
 include("../php/db_connect.php");
 
 $room_type = "Deluxe";
@@ -42,7 +47,7 @@ $conn->close();
                 <input type="text" name="name" required>
 
                 <label>Phone:</label>
-                <input type="text" name="phone" required>
+                <input type="tel" name="phone" maxlength="10" pattern="[6-9][0-9]{9}" required title="Please enter a valid 10-digit mobile number">
 
                 <label>Check-in Date:</label>
                 <input type="date" name="checkin" id="checkin" required>
@@ -112,11 +117,12 @@ $conn->close();
                             availabilityMessage.innerHTML = data;
                             if (data.includes("available")) {
                                 availabilityMessage.style.color = "green";
-                                // submitBtn.removeAttribute("disabled");
+                                submitBtn.removeAttribute("disabled");
                                 submitBtn.classList.remove("disabled-btn");
                             } else {
                                 availabilityMessage.style.color = "red";
-                                // submitBtn.setAttribute("disabled", "true");
+                                submitBtn.setAttribute("disabled", "true");
+                                submitBtn.classList.add("disabled-btn");
                             }
                         })
                         .catch(error => console.error("Error:", error));

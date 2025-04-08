@@ -9,12 +9,32 @@ if (isset($_GET["booking_id"])) {
     $booking_id = $_GET["booking_id"];
     $booking_type = $_GET["booking_type"];
 
+    switch ($booking_type) {
+        case 'room':
+            $table = 'bookings';
+            break;
+        case 'dining':
+            $table = 'dining';
+            break;
+        case 'banquet':
+            $table = 'banquet';
+            break;
+        default:
+            die("Invalid booking type.");
+    }
+
+    // Update payment_status to 'success'
+    $stmt = $conn->prepare("UPDATE $table SET payment_status = 'success' WHERE id = ?");
+    $stmt->bind_param("s", $booking_id);
+    $stmt->execute();
+
     if ($booking_type === 'room') {
         $query = "SELECT * FROM bookings WHERE id='$booking_id'";
         $result = $conn->query($query);
         $booking = $result->fetch_assoc();
 
         $customer_data = "Booking ID: " . $booking["id"] . "\n" .
+                         "Booking Type: " . $booking_type . "\n" .
                          "Name: " . $booking["name"] . "\n" .
                          "Email: " . $booking["email"] . "\n" .
                          "Phone: " . $booking["phone"] . "\n" .
@@ -31,6 +51,7 @@ if (isset($_GET["booking_id"])) {
         $booking = $result->fetch_assoc();
 
         $customer_data = "Booking ID: " . $booking["id"] . "\n" .
+                         "Booking Type: " . $booking_type . "\n" .
                          "Name: " . $booking["name"] . "\n" .
                          "Email: " . $booking["email"] . "\n" .
                          "Phone: " . $booking["phone"] . "\n" .
@@ -48,6 +69,7 @@ if (isset($_GET["booking_id"])) {
         $booking = $result->fetch_assoc();
 
         $customer_data = "Booking ID: " . $booking["id"] . "\n" .
+                         "Booking Type: " . $booking_type . "\n" .
                          "Name: " . $booking["first_name"] . " " . $booking["last_name"]."\n" .
                          "Phone: " . $booking["contact"] . "\n" .
                          "Guests: " . $booking["guests"] . "\n" .

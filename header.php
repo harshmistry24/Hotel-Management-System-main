@@ -1,7 +1,9 @@
 <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="HMSimages/1logo.png" alt="The President LOGO">
+                <a href="home.php">
+                    <img src="HMSimages/1logo.png" alt="The President LOGO">
+                </a>
                 <!-- <span>The<strong> President</strong></span> -->
             </div>
             <ul class="nav-links">

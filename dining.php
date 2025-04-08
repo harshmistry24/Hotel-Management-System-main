@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['user_id'])) {
+    header("Location:login.html");
+    exit();
+}
 date_default_timezone_set("Asia/Kolkata"); // Set to your desired timezone
 
 include 'db_connect.php';
@@ -88,70 +91,67 @@ $conn->close();
 
     <style>
         /* IMAGE SLIDER STYLES */
-.slider-container {
-    width: 90%;
-    /* Reduce width slightly to create space */
-    max-width: 1200px;
-    /* Prevents slider from becoming too wide on large screens */
-    height: 500px;
-    /* Adjust as needed */
-    overflow: hidden;
-    position: relative;
-    margin: 30px auto;
-    /* Adds space around and centers the slider */
-    border-radius: 15px;
-    /* Optional: Adds rounded corners */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    /* Optional: Adds a shadow for better visibility */
-}
+        .slider-container {
+            width: 90%;
+            /* Reduce width slightly to create space */
+            max-width: 1200px;
+            /* Prevents slider from becoming too wide on large screens */
+            height: 500px;
+            /* Adjust as needed */
+            overflow: hidden;
+            position: relative;
+            margin: 30px auto;
+            /* Adds space around and centers the slider */
+            border-radius: 15px;
+            /* Optional: Adds rounded corners */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            /* Optional: Adds a shadow for better visibility */
+        }       
 
-.slider {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.8s ease-in-out;
-}
+        .slider {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s ease-in-out;
+        }
 
-.slide {
-    min-width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Ensures image fully covers the slide */
-    border-radius: 15px;
-    /* Matches container for a smooth look */
-}
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ensures image fully covers the slide */
+            border-radius: 15px;
+            /* Matches container for a smooth look */
+        }
 
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
 
+        .prev {
+            left: 10px;
+        }
 
-
-.prev,
-.next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.prev {
-    left: 10px;
-}
-
-.next {
-    right: 10px;
-}
+        .next {
+            right: 10px;
+        }
 
         body { 
             font-family: Arial, sans-serif; 
@@ -280,7 +280,7 @@ $conn->close();
                 <p><i>You have to pay the minimal fix deposit of <b>₹<span id="fix-deposit"><?php echo $dining_deposit; ?></span></i></b></p>
 
                 <input type="hidden" name="type" value="dining">
-                <button type="submit" class="book-now" id="book-now">Book Now</button>
+                <button type="submit" class="book-now" id="book-now">Reserve</button>
                 <p id="availabilityMessage" style="color: red; text-align: center;"></p>
                 
             </div>
