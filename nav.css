@@ -97,6 +97,7 @@ body {
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
     transition: left 0.3s ease-in-out;
     padding-top: 60px;
+    z-index: 1000;
 }
 
 .sidebar.active {

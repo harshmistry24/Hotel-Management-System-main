@@ -8,7 +8,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="home.php">Home</a></li>
-                <li><a href="index.php">Rooms</a></li>
+                <li><a href="room.php">Rooms</a></li>
                 <li><a href="banquet.php">Banquet Hall</a></li>
                 <li><a href="dining.php">Dining</a></li>
                 <li><a href="food_menu.php">Food</a></li>
@@ -28,7 +28,7 @@
             <span class="close-btn" id="close-btn">&times;</span>
             <ul>
                 <li><a href="home.php">Home</a></li>
-                <li><a href="index.php">Rooms</a></li>
+                <li><a href="room.php">Rooms</a></li>
                 <li><a href="banquet.php">Banquet Hall</a></li>
                 <li><a href="dining.php">Dining</a></li>
                 <li><a href="food_menu.php">Food</a></li>

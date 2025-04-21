@@ -1,10 +1,10 @@
 <?php
-session_start(); // Start session
 
 
 // Set session timeout (3600 seconds = 1 hour)
 $session_duration = 3600;
 ini_set('session.gc_maxlifetime', $session_duration);
+session_start(); // Start session
 session_set_cookie_params($session_duration);
 
 // Store user session data
